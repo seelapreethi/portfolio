@@ -1,0 +1,457 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  background: linear-gradient(135deg, #020617, #0f172a);
+  color: #e2e8f0;
+}
+
+/* GLOBAL */
+.section-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+/* 🔥 REDUCED SECTION SPACING */
+section {
+  padding: 40px 0;   /* was 70 / 50 */
+}
+
+/* 🔥 REDUCED GAP BETWEEN SECTIONS */
+section + section {
+  margin-top: -5px;  /* was -10 */
+}
+
+a {
+  text-decoration: none;
+  color: #38bdf8;
+}
+
+h1, h2, p {
+  margin-left: 0;
+}
+
+/* 🔥 TIGHTER HEADINGS */
+h2 {
+  margin-bottom: 18px;  /* was 30 */
+  font-size: 28px;
+  font-weight: 600;
+}
+
+p {
+  line-height: 1.6;
+}
+
+/* CARD */
+.card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(15px);
+  border-radius: 16px;
+  padding: 20px;   /* was 24 */
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(56,189,248,0.15);
+}
+
+/* NAVBAR */
+.nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  background: rgba(2,6,23,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 12px 20px;  /* was 15 */
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-links {
+  display: flex;
+  gap: 18px;  /* slightly reduced */
+}
+
+.nav-links a {
+  color: #cbd5f5;
+}
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background: #38bdf8;
+  transition: 0.3s;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* HERO */
+.hero-container {
+  min-height: 88vh;  /* was 100vh */
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 30px;  /* was 40 */
+}
+
+.hero-text {
+  max-width: 600px;
+}
+
+.hero-text h1 {
+  font-size: 48px;
+}
+
+.hero-text h2 {
+  font-size: 20px;
+  color: #94a3b8;
+}
+
+.hero-text span {
+  color: #38bdf8;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 12px;  /* was 15 */
+  margin-top: 18px;
+}
+
+.hero-icons {
+  margin-top: 22px;  /* was 30 */
+  display: flex;
+  gap: 20px;
+  font-size: 26px;
+}
+
+.hero-icons a {
+  color: #94a3b8;
+  transition: 0.3s;
+}
+
+.hero-icons a:hover {
+  color: #38bdf8;
+  transform: translateY(-3px) scale(1.2);
+}
+
+.hero-image {
+  width: 280px;  /* slightly reduced */
+  height: 280px;
+}
+
+.glow-circle {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #38bdf8, transparent);
+  border-radius: 50%;
+  filter: blur(80px);
+}
+
+.primary-btn {
+  background: linear-gradient(to right, #38bdf8, #a78bfa);
+  padding: 10px 18px;
+  border-radius: 8px;
+  color: white;
+}
+
+.secondary-btn {
+  border: 1px solid #38bdf8;
+  padding: 10px 18px;
+  border-radius: 8px;
+}
+
+/* PROJECTS */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;  /* was 25 */
+  margin-top: 20px;  /* was 30 */
+}
+
+.project-card {
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  border: 1px solid #38bdf8;
+}
+
+.project-card h3 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.project-card p {
+  margin-bottom: 8px;
+  color: #cbd5f5;
+}
+
+.tech {
+  margin: 8px 0;
+}
+
+.tech span {
+  margin-right: 8px;
+  font-size: 12px;
+  color: #38bdf8;
+}
+
+/* SKILLS */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;  /* was 15 */
+  margin-top: 15px;
+}
+
+/* HEATMAP */
+.heatmap-card {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  overflow-x: auto;
+  transition: 0.3s;
+}
+
+.heatmap-card:hover {
+  transform: scale(1.01);
+}
+
+/* PROFILES */
+.profiles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;  /* was 20 */
+  margin-top: 15px;
+}
+
+/* ICON */
+.icon {
+  font-size: 32px;  /* was 35 */
+}
+
+/* STATS */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;  /* was 20 */
+}
+
+/* EXPERIENCE */
+.experience-card {
+  margin-top: 15px;
+  border-left: 3px solid #38bdf8;
+  padding-left: 15px;
+}
+
+.exp-company {
+  color: #94a3b8;
+  margin-bottom: 8px;
+}
+
+/* CONTACT */
+.contact-card {
+  margin-top: 15px;
+  padding: 20px; /* slightly better spacing */
+
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+
+  transition: 0.3s;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(56,189,248,0.12);
+}
+
+/* LINKS CONTAINER */
+.contact-links {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap; /* prevents overflow */
+  gap: 18px;
+}
+
+/* INDIVIDUAL LINK STYLE */
+.contact-links a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 14px;
+  border-radius: 8px;
+
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+
+  color: #cbd5f5;
+  font-size: 14px;
+
+  transition: all 0.3s ease;
+}
+
+/* HOVER EFFECT */
+.contact-links a:hover {
+  transform: translateY(-4px) scale(1.03);
+  color: #38bdf8;
+  border-color: #38bdf8;
+  background: rgba(56,189,248,0.08);
+}
+
+/* RESUME STRIP */
+.resume-strip {
+  padding: 18px;
+}
+
+/* ACHIEVEMENTS */
+.achievement-item {
+  margin: 8px 0;
+  padding: 10px;
+}
+
+.achievement-item:hover {
+  transform: translateX(5px);
+}
+
+/* PROFILE */
+.profile-card {
+  padding: 20px;
+}
+
+.profile-icon {
+  font-size: 30px;
+}
+
+/* LEETCODE */
+.leet-img-container {
+  margin-top: 8px;
+}
+
+.badge {
+  margin-top: 6px;
+  padding: 4px 8px;
+}
+
+/* SMOOTH SCROLL */
+html {
+  scroll-behavior: smooth;
+}
+.achievement-item {
+
+  margin: 10px 0;
+
+  padding: 12px;
+
+  border-radius: 8px;
+
+  background: rgba(255,255,255,0.05);
+
+  transition: 0.3s;
+
+}
+
+
+
+
+.achievement-item:hover {
+
+  transform: translateX(5px);
+
+  background: rgba(56,189,248,0.1);
+
+}.profile-card {
+
+  text-align: center;
+
+  padding: 25px;
+
+}
+
+
+
+
+.profile-icon {
+
+  font-size: 32px;
+
+  margin-bottom: 10px;
+
+  color: #38bdf8;
+
+}
+
+
+
+
+.leet-img-container {
+
+  margin-top: 10px;
+  height: 200px;
+  overflow-x: auto;
+
+}
+
+
+
+
+.badge {
+
+  display: inline-block;
+
+  margin-top: 8px;
+
+  padding: 4px 10px;
+
+  border-radius: 6px;
+
+  background: linear-gradient(to right, #38bdf8, #a78bfa);
+
+  font-size: 12px;
+
+}
+.about-card {
+  max-width: 750px;
+  margin-top: 20px;
+  padding: 20px;
+  border-left: 4px solid #38bdf8;
+  background: rgba(255,255,255,0.04);
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+  border-left: 4px solid #a78bfa;
+}
