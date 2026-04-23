@@ -11,7 +11,7 @@ const achievements = [
     icon: <FaCode />
   },
   {
-    text: "JLPT N5 Certified",
+    text: "JLPT N5 Qualified",
     icon: <FaCertificate />
   },
   {
