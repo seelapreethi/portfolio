@@ -11,12 +11,25 @@ export default function Hero() {
         <div className="hero-text">
 
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            Preethi Seela
-          </motion.h1>
+  className="hero-name"
+  initial={{ opacity: 0, y: 20, scale: 0.98 }}
+  animate={{
+    opacity: 1,
+    y: 0,
+    scale: [1, 1.02, 1], // subtle breathing zoom
+  }}
+  transition={{
+    opacity: { duration: 0.6 },
+    y: { duration: 0.6 },
+    scale: {
+      duration: 6,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  }}
+>
+  Preethi Seela
+</motion.h1>
 
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -35,58 +48,80 @@ export default function Hero() {
             applications and AI-powered systems.
           </motion.p>
 
-          {/* BUTTONS */}
+          {/* BUTTONS (🔥 upgraded interactions) */}
           <motion.div
             className="hero-buttons"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
           >
-            <a href="/resume.pdf" className="primary-btn">
+            <motion.a
+              href="/resume.pdf"
+              className="primary-btn"
+              whileHover={{
+                scale: 1.08,
+                boxShadow: "0px 0px 20px rgba(56,189,248,0.5)"
+              }}
+              whileTap={{ scale: 0.92 }}
+            >
               <FaDownload /> Resume
-            </a>
+            </motion.a>
 
-            <a href="#projects" className="secondary-btn">
+            <motion.a
+              href="#projects"
+              className="secondary-btn"
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.92 }}
+            >
               View Projects
-            </a>
+            </motion.a>
           </motion.div>
 
-          {/* ICONS */}
+          {/* ICONS (🔥 floating + hover glow) */}
           <motion.div
             className="hero-icons"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
           >
-            <a href="https://github.com/seelapreethi" target="_blank">
-              <FaGithub />
-            </a>
-
-            <a href="https://linkedin.com/in/preethiseela" target="_blank">
-              <FaLinkedin />
-            </a>
-
-            <a href="https://leetcode.com/u/preethiseela8/" target="_blank">
-              <SiLeetcode />
-            </a>
-
-            <a href="https://www.hackerrank.com/profile/preethi_08" target="_blank">
-              <SiHackerrank />
-            </a>
-
-            <a href="https://www.codechef.com/users/seelapreethi08" target="_blank">
-              <SiCodechef />
-            </a>
+            {[
+              { icon: <FaGithub />, link: "https://github.com/seelapreethi" },
+              { icon: <FaLinkedin />, link: "https://linkedin.com/in/preethiseela" },
+              { icon: <SiLeetcode />, link: "https://leetcode.com/u/preethiseela8/" },
+              { icon: <SiHackerrank />, link: "https://www.hackerrank.com/profile/preethi_08" },
+              { icon: <SiCodechef />, link: "https://www.codechef.com/users/seelapreethi08" }
+            ].map((item, i) => (
+              <motion.a
+                key={i}
+                href={item.link}
+                target="_blank"
+                whileHover={{
+                  y: -6,
+                  scale: 1.2,
+                  color: "#38bdf8"
+                }}
+                whileTap={{ scale: 0.9 }}
+              >
+                {item.icon}
+              </motion.a>
+            ))}
           </motion.div>
 
         </div>
 
-        {/* RIGHT */}
+        {/* RIGHT (🔥 floating glow animation) */}
         <motion.div
           className="hero-image"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
+          animate={{
+            opacity: 1,
+            y: [0, -10, 0]
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
         >
           <div className="glow-circle"></div>
         </motion.div>

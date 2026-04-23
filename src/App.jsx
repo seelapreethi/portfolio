@@ -27,28 +27,29 @@ function App() {
 
       {/* SKILLS */}
       <Skills />
-      <Experience />
+      
 
       {/* PROJECTS */}
       <Projects />
+      <Experience />
 
       {/* GITHUB HEATMAP (IMPORTANT) */}
-      <GitHubHeatmap />
 
       {/* CODING PROFILES */}
       <CodingProfiles />
+      <GitHubHeatmap />
 
       {/* EXPERIENCE */}
       
 
       {/* ACHIEVEMENTS */}
       <Achievements />
+      <Contact />
 
       {/* CALL TO ACTION */}
       <CTA />
 
       {/* CONTACT */}
-      <Contact />
     </>
   );
 }

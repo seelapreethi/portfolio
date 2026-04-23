@@ -1,55 +1,78 @@
 import { motion } from "framer-motion";
+import { FaCode, FaTrophy, FaCertificate, FaBrain } from "react-icons/fa";
+
+const achievements = [
+  {
+    text: "500+ problems on CodeChef (Diamond Badge)",
+    icon: <FaTrophy />
+  },
+  {
+    text: "200+ problems on LeetCode",
+    icon: <FaCode />
+  },
+  {
+    text: "JLPT N5 Certified",
+    icon: <FaCertificate />
+  },
+  {
+    text: "NPTEL IoT (88% Elite)",
+    icon: <FaBrain />
+  }
+];
 
 export default function Achievements() {
+
+  const container = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.15
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    show: { opacity: 1, y: 0, scale: 1 }
+  };
+
   return (
     <section>
       <div className="section-container">
 
-        {/* SECTION TITLE ANIMATION */}
+        {/* TITLE */}
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
           Achievements
         </motion.h2>
 
-        {/* LIST ANIMATION */}
-        <motion.ul
+        {/* GRID */}
+        <motion.div
+          className="achievements-grid"
+          variants={container}
           initial="hidden"
-          whileInView="visible"
-          variants={{
-            hidden: {},
-            visible: {
-              transition: {
-                staggerChildren: 0.2
-              }
-            }
-          }}
+          whileInView="show"
         >
-          
-          {[
-            "500+ problems on CodeChef (Diamond Badge)",
-            "200+ problems on LeetCode",
-            "JLPT N5 Certified",
-            "NPTEL IoT (88% Elite)"
-          ].map((item, index) => (
-            
-            <motion.li
-              key={index}
-              className="achievement-item"
-              variants={{
-                hidden: { opacity: 0, x: -30 },
-                visible: { opacity: 1, x: 0 }
-              }}
-              transition={{ duration: 0.5 }}
-            >
-              {item}
-            </motion.li>
 
+          {achievements.map((a, i) => (
+            <motion.div
+              key={i}
+              className="achievement-card"
+              variants={item}
+              whileHover={{ scale: 1.05, y: -6 }}
+            >
+              <div className="achievement-icon">
+                {a.icon}
+              </div>
+
+              <p>{a.text}</p>
+            </motion.div>
           ))}
 
-        </motion.ul>
+        </motion.div>
 
       </div>
     </section>

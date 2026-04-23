@@ -2,40 +2,54 @@ import { motion } from "framer-motion";
 
 export default function CTA() {
   return (
-    <section style={{ textAlign: "center" }}>
+    <section className="cta-section">
 
-      {/* Heading Animation */}
-      <motion.h2
-        initial={{ opacity: 0, y: 30 }}
+      {/* glow background blobs */}
+      <div className="cta-glow cta-glow-1" />
+      <div className="cta-glow cta-glow-2" />
+
+      <motion.div
+        className="cta-card"
+        initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        Looking for Opportunities
-      </motion.h2>
 
-      {/* Paragraph Animation */}
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-      >
-        I am actively looking for internship opportunities.
-      </motion.p>
+        {/* heading */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+        >
+        </motion.h2>
 
-      {/* Button Animation */}
-      <motion.a
-        href="mailto:preethiseela8@gmail.com"
-        className="primary-btn"
-        initial={{ scale: 0.8, opacity: 0 }}
-        whileInView={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.95 }}
-        style={{ display: "inline-block", marginTop: "20px" }}
-      >
-        Contact Me
-      </motion.a>
+        {/* subtext */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
+          I’m actively looking for internship opportunities and looking forward to work on real-world projects.
+        </motion.p>
 
+        {/* badges */}
+        <div className="cta-tags">
+          <span>💼 Open to Internships</span>
+          <span> MERN • AI • DSA</span>
+          <span>🌍 Remote / Onsite</span>
+        </div>
+
+        {/* button */}
+        <motion.a
+          href="mailto:preethiseela8@gmail.com"
+          className="cta-btn"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          ✉️ Contact Me
+        </motion.a>
+
+      </motion.div>
     </section>
   );
 }
