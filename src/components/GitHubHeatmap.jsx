@@ -1,57 +1,53 @@
-import {GitHubCalendar} from "react-github-calendar";
+import { GitHubCalendar } from "react-github-calendar";
 import { motion } from "framer-motion";
+import { HiArrowTopRightOnSquare } from "react-icons/hi2";
+import { useTheme } from "../context/ThemeContext.jsx";
+import SectionHeader from "./SectionHeader.jsx";
 
 export default function GitHubHeatmap() {
+  const { theme } = useTheme();
+
   return (
-    <section>
+    <section id="github-activity" aria-labelledby="github-heading">
       <div className="section-container">
+        <SectionHeader
+          kicker="Open source"
+          title="GitHub activity"
+          id="github-heading"
+        />
 
-        {/* TITLE */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          GitHub Activity
-        </motion.h2>
-
-        {/* OUTER FLOATING WRAPPER */}
         <motion.div
-          className="heatmap-card animated-heatmap"
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-          whileHover={{ scale: 1.02 }}
-          animate={{
-            y: [0, -6, 0]
-          }}
-          transition={{
-            y: {
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }
-          }}
-          viewport={{ once: true }}
+          className="heatmap-shell"
+          initial={{ opacity: 0, y: 22 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.45 }}
         >
-
-          {/* INNER CONTENT */}
-          <motion.div
-            className="heatmap-inner"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
+          <div className="heatmap-header">
+            <p className="heatmap-intro">
+              Public contribution history for{" "}
+              <strong>seelapreethi</strong>. The graph reflects steady iteration
+              across coursework, side projects, and maintenance.
+            </p>
+            <a
+              className="heatmap-external link-btn"
+              href="https://github.com/seelapreethi"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Profile
+              <HiArrowTopRightOnSquare aria-hidden />
+            </a>
+          </div>
+          <div className="heatmap-inner">
             <GitHubCalendar
               username="seelapreethi"
-              blockSize={9}
-              blockMargin={3}
+              blockSize={11}
+              blockMargin={4}
               fontSize={12}
-              colorScheme="dark"
+              colorScheme={theme}
             />
-          </motion.div>
-
+          </div>
         </motion.div>
       </div>
     </section>

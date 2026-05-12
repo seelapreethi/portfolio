@@ -1,52 +1,35 @@
 import { motion } from "framer-motion";
+import SectionHeader from "./SectionHeader.jsx";
 
 export default function About() {
   return (
-    <section id="about">
+    <section id="about" aria-labelledby="about-heading">
       <div className="section-container">
+        <SectionHeader kicker="Introduction" title="About me" id="about-heading" />
 
-        {/* Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          About Me
-        </motion.h2>
-
-        {/* Card Container */}
         <motion.div
           className="about-card"
-          initial={{ opacity: 0, y: 50, scale: 0.95 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, margin: "-40px" }}
         >
-
-          {/* Paragraph */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            Passionate Computer Science student with strong skills in Data Structures,
-            Full Stack Development (MERN), and AI/ML. I enjoy building scalable
-            applications and intelligent systems that solve real-world problems.
-          </motion.p>
-
-          {/* Extra line (adds depth) */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-          >
-            Currently focusing on improving problem-solving skills, backend
-            architecture, and deploying production-ready applications.
-          </motion.p>
-
+          <p>
+            I am a computer science student focused on full-stack development using the
+            MERN stack, with strong interest in scalable backend systems, clean APIs,
+            and responsive user interfaces. Alongside web development, I enjoy exploring
+            AI and machine learning, especially NLP, RAG-based applications, and building
+            practical solutions that combine software engineering with intelligent systems.
+          </p>
+          <p>
+            My approach is to break complex problems into manageable parts, build
+            iteratively, and improve through continuous learning and experimentation.
+            I enjoy solving DSA problems, developing real-world projects, and refining
+            systems for better performance and usability. I am currently seeking internship
+            opportunities where I can contribute to impactful products, collaborate with
+            experienced engineers, and grow as a software developer.
+          </p>
         </motion.div>
-
       </div>
     </section>
   );

@@ -2,9 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      (function () {
+        var t = localStorage.getItem("portfolio-theme");
+        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+        else document.documentElement.dataset.theme = "dark";
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>portfolio-1</title>
+    <meta name="description" content="Preethi Seela — full-stack developer portfolio, projects, and experience." />
+    <title>Preethi Seela | Portfolio</title>
   </head>
   <body>
     <div id="root"></div>

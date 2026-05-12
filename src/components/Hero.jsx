@@ -1,131 +1,173 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaDownload } from "react-icons/fa";
 import { SiLeetcode, SiHackerrank, SiCodechef } from "react-icons/si";
 
+const SOCIAL = [
+  {
+    icon: FaGithub,
+    href: "https://github.com/seelapreethi",
+    label: "GitHub profile",
+  },
+  {
+    icon: FaLinkedin,
+    href: "https://linkedin.com/in/preethiseela",
+    label: "LinkedIn profile",
+  },
+  {
+    icon: SiLeetcode,
+    href: "https://leetcode.com/u/preethiseela8/",
+    label: "LeetCode profile",
+  },
+  {
+    icon: SiHackerrank,
+    href: "https://www.hackerrank.com/profile/preethi_08",
+    label: "HackerRank profile",
+  },
+  {
+    icon: SiCodechef,
+    href: "https://www.codechef.com/users/seelapreethi08",
+    label: "CodeChef profile",
+  },
+];
+
 export default function Hero() {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <section id="hero" className="hero">
-      <div className="section-container hero-content">
+    <section id="hero" className="hero" aria-labelledby="hero-heading">
+      <div className="section-container hero-container">
+        <div className="hero-content">
+          <div className="hero-text">
+            <motion.p
+              className="hero-tagline"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45 }}
+            >
+              <span aria-hidden="true" />
+              Full-stack · AI/ML · Problem solving
+            </motion.p>
 
-        {/* LEFT */}
-        <div className="hero-text">
-
-          <motion.h1
-  className="hero-name"
-  initial={{ opacity: 0, y: 20, scale: 0.98 }}
-  animate={{
-    opacity: 1,
-    y: 0,
-    scale: [1, 1.02, 1], // subtle breathing zoom
-  }}
-  transition={{
-    opacity: { duration: 0.6 },
-    y: { duration: 0.6 },
-    scale: {
-      duration: 6,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
-  }}
->
-  Preethi Seela
-</motion.h1>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            Aspiring Software Engineer <span>| MERN | AI/ML</span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-          >
-            Passionate Computer Science student building scalable full-stack
-            applications and AI-powered systems.
-          </motion.p>
-
-          {/* BUTTONS (🔥 upgraded interactions) */}
-          <motion.div
-            className="hero-buttons"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-          >
-            <motion.a
-              href="/resume.pdf"
-              className="primary-btn"
-              whileHover={{
-                scale: 1.08,
-                boxShadow: "0px 0px 20px rgba(56,189,248,0.5)"
+            <motion.h1
+              id="hero-heading"
+              className="hero-name"
+              initial={{ opacity: 0, y: 18 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                ...(reduceMotion
+                  ? {}
+                  : { scale: [1, 1.01, 1] }),
               }}
-              whileTap={{ scale: 0.92 }}
+              transition={{
+                opacity: { duration: 0.55 },
+                y: { duration: 0.55 },
+                scale: reduceMotion
+                  ? undefined
+                  : { duration: 8, repeat: Infinity, ease: "easeInOut" },
+              }}
             >
-              <FaDownload /> Resume
-            </motion.a>
+              Preethi Seela
+            </motion.h1>
 
-            <motion.a
-              href="#projects"
-              className="secondary-btn"
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.92 }}
+            <motion.p
+              className="hero-role"
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.12, duration: 0.5 }}
             >
-              View Projects
-            </motion.a>
-          </motion.div>
+              Aspiring software engineer · <span>MERN</span> · <span>AI/ML</span>
+            </motion.p>
 
-          {/* ICONS (🔥 floating + hover glow) */}
-          <motion.div
-            className="hero-icons"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-          >
-            {[
-              { icon: <FaGithub />, link: "https://github.com/seelapreethi" },
-              { icon: <FaLinkedin />, link: "https://linkedin.com/in/preethiseela" },
-              { icon: <SiLeetcode />, link: "https://leetcode.com/u/preethiseela8/" },
-              { icon: <SiHackerrank />, link: "https://www.hackerrank.com/profile/preethi_08" },
-              { icon: <SiCodechef />, link: "https://www.codechef.com/users/seelapreethi08" }
-            ].map((item, i) => (
+            <motion.p
+              className="hero-lead"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.22, duration: 0.5 }}
+            >
+              I design and build full-stack web applications from frontend to backend,
+              with a strong focus on clean architecture, performance, and user experience.
+              I am especially interested in AI-powered applications, machine learning systems,
+              and solving real-world problems through scalable software and continuous learning.
+            </motion.p>
+
+            <motion.div
+              className="hero-buttons"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.32, duration: 0.45 }}
+            >
               <motion.a
-                key={i}
-                href={item.link}
-                target="_blank"
-                whileHover={{
-                  y: -6,
-                  scale: 1.2,
-                  color: "#38bdf8"
-                }}
-                whileTap={{ scale: 0.9 }}
+                href="/resume.pdf"
+                className="primary-btn"
+                download
+                whileHover={reduceMotion ? undefined : { y: -2 }}
+                whileTap={reduceMotion ? undefined : { scale: 0.98 }}
               >
-                {item.icon}
+                <FaDownload aria-hidden /> Resume
               </motion.a>
-            ))}
+
+              <motion.a
+                href="#projects"
+                className="secondary-btn"
+                whileHover={reduceMotion ? undefined : { y: -2 }}
+                whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+              >
+                View projects
+              </motion.a>
+
+              <motion.a
+                href="#contact"
+                className="secondary-btn hero-btn-ghost"
+                whileHover={reduceMotion ? undefined : { y: -2 }}
+                whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+              >
+                Contact
+              </motion.a>
+            </motion.div>
+
+            <motion.div
+              className="hero-icons"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.42, duration: 0.45 }}
+            >
+              {SOCIAL.map(({ icon: Icon, href, label }) => (
+                <motion.a
+                  key={href}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  whileHover={reduceMotion ? undefined : { y: -4 }}
+                  whileTap={reduceMotion ? undefined : { scale: 0.94 }}
+                >
+                  <Icon aria-hidden />
+                </motion.a>
+              ))}
+            </motion.div>
+          </div>
+
+          <motion.div
+            className="hero-visual"
+            aria-hidden="true"
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              ...(reduceMotion ? {} : { y: [0, -8, 0] }),
+            }}
+            transition={{
+              opacity: { duration: 0.6, delay: 0.15 },
+              scale: { duration: 0.6, delay: 0.15 },
+              y: reduceMotion
+                ? undefined
+                : { duration: 5, repeat: Infinity, ease: "easeInOut" },
+            }}
+          >
+            <div className="glow-circle" />
           </motion.div>
-
         </div>
-
-        {/* RIGHT (🔥 floating glow animation) */}
-        <motion.div
-          className="hero-image"
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            y: [0, -10, 0]
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        >
-          <div className="glow-circle"></div>
-        </motion.div>
-
       </div>
     </section>
   );

@@ -1,54 +1,49 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { HiArrowTopRightOnSquare } from "react-icons/hi2";
 
 export default function CTA() {
-  return (
-    <section className="cta-section">
+  const reduceMotion = useReducedMotion();
 
-      {/* glow background blobs */}
-      <div className="cta-glow cta-glow-1" />
-      <div className="cta-glow cta-glow-2" />
+  return (
+    <section className="cta-section" aria-labelledby="cta-heading">
+      <div className="cta-glow cta-glow-1" aria-hidden="true" />
+      <div className="cta-glow cta-glow-2" aria-hidden="true" />
 
       <motion.div
         className="cta-card"
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 28 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.5 }}
       >
+        <h2 id="cta-heading">Open to internships</h2>
 
-        {/* heading */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-        >
-        </motion.h2>
-
-        {/* subtext */}
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.08, duration: 0.45 }}
         >
-          I’m actively looking for internship opportunities and looking forward to work on real-world projects.
+          I am looking for roles where I can contribute to production systems,
+          learn from senior engineers, and grow as a full-stack developer with
+          exposure to AI-driven features.
         </motion.p>
 
-        {/* badges */}
         <div className="cta-tags">
-          <span>💼 Open to Internships</span>
-          <span> MERN • AI • DSA</span>
-          <span>🌍 Remote / Onsite</span>
+          <span>Internships</span>
+          <span>MERN · AI/ML · DSA</span>
+          <span>Remote or onsite</span>
         </div>
 
-        {/* button */}
         <motion.a
           href="mailto:preethiseela8@gmail.com"
           className="cta-btn"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={reduceMotion ? undefined : { y: -2 }}
+          whileTap={reduceMotion ? undefined : { scale: 0.98 }}
         >
-          ✉️ Contact Me
+          Email me
+          <HiArrowTopRightOnSquare aria-hidden />
         </motion.a>
-
       </motion.div>
     </section>
   );

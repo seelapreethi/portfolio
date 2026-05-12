@@ -1,25 +1,34 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import SectionHeader from "./SectionHeader.jsx";
 
 export default function Stats() {
+  const reduceMotion = useReducedMotion();
   const stats = [
-    { label: "DSA Problems", value: "700+" },
-    { label: "Projects", value: "4+" },
+    { label: "DSA problems", value: "700+" },
+    { label: "Projects", value: "5+" },
     { label: "Technologies", value: "6+" },
-    { label: "CGPA", value: "9.6" }
+    { label: "CGPA", value: "9.6" },
   ];
 
   return (
-    <section>
+    <section id="profile" aria-labelledby="profile-heading">
       <div className="section-container">
-        <h2>Profile Overview</h2>
+        <SectionHeader
+          kicker="At a glance"
+          title="Profile overview"
+          id="profile-heading"
+        />
 
         <div className="stats-grid">
           {stats.map((s, i) => (
             <motion.div
-              key={i}
+              key={s.label}
               className="stat-pill"
-              whileHover={{ scale: 1.06 }}
-              whileTap={{ scale: 0.98 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ delay: i * 0.06, duration: 0.4 }}
+              whileHover={reduceMotion ? undefined : { y: -3 }}
             >
               <span className="stat-value">{s.value}</span>
               <span className="stat-label">{s.label}</span>
