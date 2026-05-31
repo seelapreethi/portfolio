@@ -8,6 +8,10 @@ import {
 import { HiArrowTopRightOnSquare } from "react-icons/hi2";
 import { useTheme } from "../context/ThemeContext.jsx";
 import SectionHeader from "./SectionHeader.jsx";
+import AnimatedCounter from "./motion/AnimatedCounter.jsx";
+import PageCarousel from "./motion/PageCarousel.jsx";
+import ScrollReveal from "./motion/ScrollReveal.jsx";
+import GradientBorder from "./motion/GradientBorder.jsx";
 
 const PROFILES = [
   {
@@ -19,8 +23,8 @@ const PROFILES = [
     Icon: SiGithub,
     iconClass: "profile-icon gh",
     highlights: [
-      { label: "Focus", value: "Full-stack & ML repos" },
-      { label: "Activity", value: "Year-round commits" },
+      { label: "Focus", value: "Full-stack & ML repos", count: false },
+      { label: "Activity", value: "Year-round commits", count: false },
     ],
     embed: null,
   },
@@ -33,8 +37,8 @@ const PROFILES = [
     Icon: SiLeetcode,
     iconClass: "profile-icon lc",
     highlights: [
-      { label: "Problems", value: "200+ solved" },
-      { label: "Streak", value: "Consistent practice" },
+      { label: "Problems", value: "200+", count: true },
+      { label: "Streak", value: "Consistent practice", count: false },
     ],
     embed: "leetcard",
   },
@@ -47,8 +51,8 @@ const PROFILES = [
     Icon: SiCodechef,
     iconClass: "profile-icon cc",
     highlights: [
-      { label: "Practice", value: "500+ problems" },
-      { label: "Badge", value: "Diamond" },
+      { label: "Practice", value: "500+", count: true },
+      { label: "Badge", value: "Diamond", count: false },
     ],
     embed: null,
   },
@@ -61,103 +65,147 @@ const PROFILES = [
     Icon: SiHackerrank,
     iconClass: "profile-icon hr",
     highlights: [
-      { label: "Badges", value: "Gold skill badges" },
-      { label: "Domains", value: "DSA, SQL, Python" },
+      { label: "Badges", value: "Gold skill badges", count: false },
+      { label: "Domains", value: "DSA, SQL, Python", count: false },
     ],
     embed: null,
   },
 ];
 
+function ProfileCard({ profile, leetTheme, reduceMotion, index }) {
+  const Icon = profile.Icon;
+  const isGitHub = profile.key === "github";
+
+  return (
+    <GradientBorder className="profile-card-border">
+      <motion.article
+        className={`profile-card profile-card--featured profile-card--dashboard glass-card ${
+          isGitHub ? "profile-card--github" : ""
+        }`}
+        animate={
+          reduceMotion
+            ? undefined
+            : { y: [0, -4, 0] }
+        }
+        transition={
+          reduceMotion
+            ? undefined
+            : {
+                duration: 8 + (index % 3) * 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: index * 0.5,
+              }
+        }
+        whileHover={
+          reduceMotion
+            ? undefined
+            : {
+                y: -6,
+                boxShadow: "0 16px 36px rgba(114, 102, 160, 0.14), 0 0 20px rgba(176, 120, 146, 0.08)",
+              }
+        }
+      >
+        <div className="profile-card-glow" aria-hidden="true" />
+        <motion.div
+          className="profile-card-sweep"
+          aria-hidden="true"
+          animate={
+            reduceMotion
+              ? undefined
+              : { x: ["-120%", "120%"] }
+          }
+          transition={
+            reduceMotion
+              ? undefined
+              : { duration: 4, repeat: Infinity, repeatDelay: 5, ease: "easeInOut" }
+          }
+        />
+
+        <div className="profile-top">
+          <div className={`profile-icon-wrap ${profile.iconClass}`}>
+            <Icon className="profile-icon-svg" aria-hidden />
+          </div>
+          <div className="profile-headings">
+            <h3>{profile.name}</h3>
+            <p className="muted-text">@{profile.handle}</p>
+          </div>
+        </div>
+
+        <p className="profile-blurb">{profile.blurb}</p>
+
+        <dl className="profile-stat-grid">
+          {profile.highlights.map((row) => (
+            <div key={row.label} className="profile-stat profile-stat--glow">
+              <dt>{row.label}</dt>
+              <dd>
+                {row.count ? <AnimatedCounter value={row.value} /> : row.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
+
+        {profile.embed === "leetcard" ? (
+          <div className="leet-img-container">
+            <img
+              key={leetTheme}
+              src={`https://leetcard.jacoblin.cool/${profile.handle}?theme=${leetTheme}&ext=heatmap`}
+              alt={`${profile.name} stats card`}
+              loading="lazy"
+            />
+          </div>
+        ) : null}
+
+        <div className="profile-actions">
+          <a
+            className="profile-link"
+            href={profile.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open profile
+            <HiArrowTopRightOnSquare aria-hidden />
+          </a>
+        </div>
+      </motion.article>
+    </GradientBorder>
+  );
+}
+
 export default function CodingProfiles() {
   const { theme } = useTheme();
   const reduceMotion = useReducedMotion();
-
-  const container = {
-    hidden: {},
-    visible: {
-      transition: { staggerChildren: 0.08 },
-    },
-  };
-
-  const card = {
-    hidden: { opacity: 0, y: 22 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   const leetTheme = theme === "light" ? "light" : "dark";
 
   return (
-    <section id="coding-profiles" aria-labelledby="profiles-heading">
+    <section id="coding-profiles" className="section-featured" aria-labelledby="profiles-heading">
       <div className="section-container">
-        <SectionHeader
-          kicker="Platforms"
-          title="Coding profiles"
-          id="profiles-heading"
-        />
+        <ScrollReveal variantIndex={3}>
+          <SectionHeader
+            kicker="Platforms"
+            title="Coding profiles"
+            id="profiles-heading"
+            variantIndex={1}
+          />
+        </ScrollReveal>
 
-        <motion.div
-          className="profiles-grid upgraded"
-          variants={container}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-40px" }}
-        >
-          {PROFILES.map((p) => {
-            const Icon = p.Icon;
-            return (
-            <motion.article
-              key={p.key}
-              className="profile-card glass"
-              variants={card}
-              whileHover={reduceMotion ? undefined : { y: -4 }}
-            >
-              <div className="profile-top">
-                <div className={`profile-icon-wrap ${p.iconClass}`}>
-                  <Icon className="profile-icon-svg" aria-hidden />
-                </div>
-                <div className="profile-headings">
-                  <h3>{p.name}</h3>
-                  <p className="muted-text">@{p.handle}</p>
-                </div>
-              </div>
-
-              <p className="profile-blurb">{p.blurb}</p>
-
-              <dl className="profile-stat-grid">
-                {p.highlights.map((row) => (
-                  <div key={row.label} className="profile-stat">
-                    <dt>{row.label}</dt>
-                    <dd>{row.value}</dd>
-                  </div>
-                ))}
-              </dl>
-
-              {p.embed === "leetcard" ? (
-                <div className="leet-img-container">
-                  <img
-                    key={leetTheme}
-                    src={`https://leetcard.jacoblin.cool/${p.handle}?theme=${leetTheme}&ext=heatmap`}
-                    alt={`${p.name} stats card`}
-                    loading="lazy"
-                  />
-                </div>
-              ) : null}
-
-              <div className="profile-actions">
-                <a
-                  className="profile-link"
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Open profile
-                  <HiArrowTopRightOnSquare aria-hidden />
-                </a>
-              </div>
-            </motion.article>
-            );
-          })}
-        </motion.div>
+        <ScrollReveal variantIndex={3}>
+          <PageCarousel
+            items={PROFILES}
+            ariaLabel="Coding profiles"
+            desktop={3}
+            tablet={2}
+            mobile={1}
+            renderItem={(profile, index) => (
+              <ProfileCard
+                profile={profile}
+                leetTheme={leetTheme}
+                reduceMotion={reduceMotion}
+                index={index}
+              />
+            )}
+          />
+        </ScrollReveal>
       </div>
     </section>
   );

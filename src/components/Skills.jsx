@@ -19,9 +19,11 @@ import {
   SiTensorflow,
   SiPytorch,
 } from "react-icons/si";
-
 import { FaBrain } from "react-icons/fa";
 import SectionHeader from "./SectionHeader.jsx";
+import ScrollReveal from "./motion/ScrollReveal.jsx";
+import TiltCard from "./motion/TiltCard.jsx";
+import { staggerContainer } from "../motion/variants.js";
 
 const skillGroups = [
   {
@@ -33,7 +35,6 @@ const skillGroups = [
       { name: "JavaScript", Icon: SiJavascript },
     ],
   },
-
   {
     title: "Frontend",
     items: [
@@ -43,7 +44,6 @@ const skillGroups = [
       { name: "JavaScript", Icon: SiJavascript },
     ],
   },
-
   {
     title: "Backend",
     items: [
@@ -54,7 +54,6 @@ const skillGroups = [
       { name: "API routing" },
     ],
   },
-
   {
     title: "Databases",
     items: [
@@ -63,7 +62,6 @@ const skillGroups = [
       { name: "SQL", Icon: SiMysql },
     ],
   },
-
   {
     title: "Tools",
     items: [
@@ -74,7 +72,6 @@ const skillGroups = [
       { name: "Vercel" },
     ],
   },
-
   {
     title: "AI / ML",
     items: [
@@ -90,44 +87,89 @@ const skillGroups = [
 
 export default function Skills() {
   const reduceMotion = useReducedMotion();
+  const container = staggerContainer(0.08, 0.05);
 
   return (
-    <section id="skills" aria-labelledby="skills-heading">
+    <section id="skills" className="section-featured" aria-labelledby="skills-heading">
       <div className="section-container">
-        <SectionHeader
-          kicker="Stack"
-          title="Skills"
-          id="skills-heading"
-        />
+        <ScrollReveal variantIndex={3}>
+          <SectionHeader
+            kicker="Stack"
+            title="Skills"
+            id="skills-heading"
+            variantIndex={3}
+          />
+        </ScrollReveal>
 
-        <div className="skills-groups">
-          {skillGroups.map((group, i) => (
+        <motion.div
+          className="skills-groups"
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-40px" }}
+        >
+          {skillGroups.map((group, index) => (
             <motion.div
               key={group.title}
-              className="skill-group card"
-              initial={{ opacity: 0, y: 22 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05, duration: 0.42 }}
-              viewport={{ once: true, margin: "-36px" }}
-              whileHover={reduceMotion ? undefined : { y: -3 }}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
+                },
+              }}
             >
-              <h3>{group.title}</h3>
+              <TiltCard
+                className={`skill-group card skill-group--premium skill-group--float`}
+                maxTilt={6}
+              >
+                <motion.div
+                  className="skill-card-shine"
+                  aria-hidden="true"
+                  animate={
+                    reduceMotion
+                      ? undefined
+                      : { x: ["-120%", "120%"] }
+                  }
+                  transition={
+                    reduceMotion
+                      ? undefined
+                      : { duration: 5, repeat: Infinity, repeatDelay: 3, ease: "easeInOut" }
+                  }
+                />
+                <motion.div
+                  animate={
+                    reduceMotion
+                      ? undefined
+                      : { y: [0, -5, 0] }
+                  }
+                  transition={
+                    reduceMotion
+                      ? undefined
+                      : {
+                          duration: 6 + (index % 3),
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.4,
+                        }
+                  }
+                >
+                  <h3>{group.title}</h3>
 
-              <div className="skill-row" role="list">
-                {group.items.map(({ name, Icon }) => (
-                  <span
-                    key={name}
-                    className="skill-chip"
-                    role="listitem"
-                  >
-                    {Icon && <Icon aria-hidden="true" />}
-                    {name}
-                  </span>
-                ))}
-              </div>
+                  <div className="skill-row" role="list">
+                    {group.items.map(({ name, Icon }) => (
+                      <span key={name} className="skill-chip skill-chip--glow" role="listitem">
+                        {Icon ? <Icon aria-hidden="true" /> : null}
+                        {name}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              </TiltCard>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
